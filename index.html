@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Demo</title>    
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+        background-color: #004488;
+      }
+      canvas {
+        background-color: #008844;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script src="js/vendor/jquery-1.6.2.js"></script>
+    <script src="js/vendor/Three.js"></script>
+    <script src="js/vendor/joose-3.18.0-Core.js"></script> 
+    <script src="js/sketch/Page.js"></script>
+    <script type="text/javascript">
+    var container, stats;
+
+    var camera, scene, projector, renderer;
+
+    window.requestAnimationFrame = window.requestAnimationFrame || function(callback) { setTimeout(callback, 10); }
+
+    init();
+    animate();
+
+    function init() {
+      container = document.createElement("div");
+      document.body.appendChild(container);
+
+
+      camera = new THREE.Camera(70, window.innerWidth / window.innerHeight, 1, 10000);
+//      camera.position.y = 300;
+      camera.position.z = 2;
+
+      scene = new THREE.Scene();
+
+      var page = new Page();
+      scene.addObject(page);
+
+      renderer = new THREE.WebGLRenderer();
+      renderer.sortObjects = false;
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      container.appendChild(renderer.domElement);
+
+    };
+
+    function animate() {
+      requestAnimationFrame(animate); 
+      render();
+    }
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    </script>
+    
+  </body>
+</html>
