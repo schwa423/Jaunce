@@ -1,2 +1,17 @@
 
 What are our responsibilities for destroying Three.js objects?  Does garbage-collection free the WebGL resource?  How can we immediately free a resource without waiting for garbage-collection?  For example, if we want to vary the resolution that we render a Page at, we might want to change its encapsulated RenderTarget; if we do so, we'll want to free the resources of the old RenderTarget ASAP.
+
+Test how intersection works with a child object in a hierarchy.  Does ray.intersectScene(scene) return a list of the leaf nodes whose geometry is actually hit?  In that case, we might need to walk up the parent chain to find the object that we actually want to handle the event.
+
+Validate input event type in:
+- CameraRayPicker
+- TransformFromWindowToDiv
+- TransformToNormalizedViewportCoordinates
+- etc.
+... if the input type isn't recognized, then pass the
+event through unchanged.
+
+
+THREE.js improvements:
+- why not call superclass implementation in:
+    - Camera.update()
